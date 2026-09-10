@@ -1,17 +1,32 @@
+
+
 import Header from './components/Header';
 import ContactList from './components/ContactList';
-import Footer from './components/Footer';
+//MISMOS NOMBRES QUE EN CONTACTLIST, PARA QUE SEAN IGUALES Y NO HAYA ERRORES. SI NO SON IGUALES, NO FUNCIONA.
+const contacts = [
+  { id: 1, name: "Ana García", phone: "+1 (555) 123-4567", email: "ana@email.com", isFavorite: true },
+  { id: 2, name: "Carlos López", phone: "+1 (555) 987-6543", email: "carlos@email.com", isFavorite: false },
+  { id: 3, name: "María Torres", phone: "+1 (555) 456-7890", email: "maria@email.com", isFavorite: true },
+  { id: 4, name: "Luis Martínez", phone: "+1 (555) 234-5678", email: "luis@email.com", isFavorite: false }
+];
 
 export default function App() {
+// Recorre contacts y crea un nuevo array solo con los favoritos Y Guarda la cantidad final en la variable favoriteCount.
+  const favoriteCount = contacts.filter(function(c) {
+// c es el contacto que se está revisando en esta vuelta. Si c.isFavorite es true, se incluye; si es false, se excluye.
+    return c.isFavorite;
+// .length cuenta cuántos contactos quedaron en el nuevo array.
+  }).length;
+
   return (
-    <div>
+    <div style={{ padding: '20px', maxWidth: '500px', margin: '0 auto' }}>
       <Header />
 
-      <main style={{ padding: '20px' }}>
-        <ContactList />
-      </main>
+      <p style={{ color: '#666' }}>
+        Total: {contacts.length} contactos | Favoritos: {favoriteCount}
+      </p>
 
-      <Footer />
+      <ContactList contacts={contacts} />
     </div>
   );
 }
