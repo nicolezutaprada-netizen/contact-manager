@@ -7,7 +7,7 @@ export default function Header() {
       borderRadius: '8px',
       marginBottom: '20px'
     }}>
-      <h1 style={{ margin: 0 }}>📱 Contact Manager</h1>
+      <h1 style={{ margin: 0, fontSize: 'clamp(24px, 5vw, 32px)', lineHeight: 1.2, color: 'inherit', letterSpacing: 'normal' }}>📱 Contact Manager</h1>
       <p style={{ margin: '10px 0 0 0', opacity: 0.9 }}>
         Gestiona tus contactos de forma sencilla
       </p>

@@ -1,16 +1,64 @@
-# React + Vite
+# Contact Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Agenda de contactos desarrollada con React, JavaScript y Vite. Este laboratorio practica componentes reutilizables, props, listas y estilos condicionales.
 
-Currently, two official plugins are available:
+## Funcionalidades implementadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Encabezado con el componente `Header`.
+- Tarjetas `ContactCard` que reciben y muestran las props `name`, `phone`, `email` e `isFavorite`.
+- Lista de contactos generada con `.map()` en `ContactList`.
+- Identificación de cada tarjeta mediante `key={contact.id}`.
+- Borde, fondo y estrella que cambian según el valor de `isFavorite`.
+- Contador total con `contacts.length` y contador de favoritos con `.filter().length`.
 
-## React Compiler
+Los datos se definen en el array `contacts` de `src/App.jsx`. Actualmente hay cuatro contactos, dos de ellos favoritos. Al modificar el array y guardar, la lista y los contadores reflejan esos datos.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologías
 
-## Expanding the ESLint configuration
+- React y JSX
+- JavaScript
+- CSS y estilos inline
+- Vite
+- pnpm
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Ejecutar el proyecto
+
+Requisitos: Node.js y pnpm instalados.
+
+Abre una terminal dentro de la carpeta `Contact-Manager` y ejecuta:
+
+```bash
+pnpm install
+pnpm dev
+```
+
+En Windows PowerShell puedes usar `pnpm.cmd install` y `pnpm.cmd dev`.
+
+Abre la dirección que indique Vite junto a `Local`, normalmente `http://localhost:5173/`. Mantén la terminal abierta mientras utilizas la aplicación. Para detenerla, pulsa `Ctrl + C`.
+
+## Estructura principal
+
+```text
+src/
+├── components/
+│   ├── Header.jsx
+│   ├── ContactCard.jsx
+│   └── ContactList.jsx
+├── App.jsx
+├── index.css
+└── main.jsx
+```
+
+`App.jsx` contiene los datos y calcula los contadores. `ContactList` recorre los contactos y pasa sus datos a `ContactCard`. `Header` muestra el encabezado.
+
+## Verificación de la entrega
+
+1. Comprobar que aparecen el encabezado y las cuatro tarjetas con nombre, teléfono y correo.
+2. Comprobar que el contador muestra cuatro contactos y dos favoritos.
+3. Comparar un favorito con un contacto normal: deben cambiar la estrella, el borde y el fondo.
+4. Agregar un contacto al array con un `id` único y guardar: debe aparecer una tarjeta adicional y actualizarse el total.
+5. Cambiar `isFavorite` en los datos y guardar: deben actualizarse los estilos y la cantidad de favoritos.
+
+## Repositorio
+
+[Contact Manager en GitHub](https://github.com/nicolezutaprada-netizen/contact-manager)

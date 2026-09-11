@@ -2,7 +2,7 @@
 
 import Header from './components/Header';
 import ContactList from './components/ContactList';
-//MISMOS NOMBRES QUE EN CONTACTLIST, PARA QUE SEAN IGUALES Y NO HAYA ERRORES. SI NO SON IGUALES, NO FUNCIONA.
+// Las propiedades de cada contacto coinciden con las que se leen en ContactList.
 const contacts = [
   { id: 1, name: "Ana García", phone: "+1 (555) 123-4567", email: "ana@email.com", isFavorite: true },
   { id: 2, name: "Carlos López", phone: "+1 (555) 987-6543", email: "carlos@email.com", isFavorite: false },
@@ -19,10 +19,10 @@ export default function App() {
   }).length;
 
   return (
-    <div style={{ padding: '20px', maxWidth: '500px', margin: '0 auto' }}>
+    <div style={{ padding: '20px', width: '100%', maxWidth: '600px', boxSizing: 'border-box', margin: '0 auto' }}>
       <Header />
 
-      <p style={{ color: '#666' }}>
+      <p style={{ color: '#666', margin: '0 0 16px', lineHeight: 1.5 }}>
         Total: {contacts.length} contactos | Favoritos: {favoriteCount}
       </p>
 

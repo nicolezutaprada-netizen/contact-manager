@@ -10,14 +10,17 @@ export default function ContactCard({ name, phone, email, isFavorite }) {
   const cardStyle = {
     border: isFavorite ? '2px solid #ffd700' : '1px solid #ddd', // Si es favorito, el borde es dorado y más grueso; si no, es gris y delgado.
     borderRadius: '8px',
+    overflowWrap: 'anywhere',
     padding: '15px',
     marginBottom: '10px',
     backgroundColor: isFavorite ? '#fffef0' : '#fff'
   };
 
   return (
-    <div style={cardStyle}> //pa usar los estilos de la constante cardsrstyle
-      <h3 style={{ margin: '0 0 10px 0' }}> // 0 margen arriba, 0 margen derecha, 10px margen abajo, 0 margen izquierda
+    <div style={cardStyle}>
+      {/* Aplica los estilos guardados en cardStyle. */}
+      {/* Margen inferior de 10px para separar el nombre de los datos. */}
+      <h3 style={{ margin: '0 0 10px 0', lineHeight: 1.4 }}>
         {name}
         <span style={{ marginLeft: '10px' }}> 
           {isFavorite ? '⭐' : '☆'}
@@ -28,5 +31,6 @@ export default function ContactCard({ name, phone, email, isFavorite }) {
     </div>
   );
 }
+
 
 

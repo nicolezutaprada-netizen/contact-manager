@@ -10,7 +10,7 @@ export default function ContactList({ contacts }) {
       {contacts.map(function(contact) {
         return (
           <ContactCard
-          //MISMOS ERROS QUE EN EL ARRAY DE CONTACTS, PARA QUE SEAN IGUALES Y NO HAYA ERRORES. SI NO SON IGUALES, NO FUNCIONA.(CONTACT...)
+          // Lee los datos del contacto y los pasa como props a ContactCard.
             key={contact.id}
             name={contact.name} //name= es el que debe ser igual al parametro del contact card
             phone={contact.phone}
