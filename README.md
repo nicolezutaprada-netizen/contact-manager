@@ -1,17 +1,33 @@
 # Contact Manager
 
-Agenda de contactos desarrollada con React, JavaScript y Vite. Este laboratorio practica componentes reutilizables, props, listas y estilos condicionales.
+Agenda de contactos desarrollada con React, JavaScript y Vite. El proyecto practica componentes reutilizables, estado con `useState`, props, funciones como props y manejo de eventos.
 
 ## Funcionalidades implementadas
 
 - Encabezado con el componente `Header`.
-- Tarjetas `ContactCard` que reciben y muestran las props `name`, `phone`, `email` e `isFavorite`.
-- Lista de contactos generada con `.map()` en `ContactList`.
-- Identificación de cada tarjeta mediante `key={contact.id}`.
-- Borde, fondo y estrella que cambian según el valor de `isFavorite`.
-- Contador total con `contacts.length` y contador de favoritos con `.filter().length`.
+- Tarjetas `ContactCard` con nombre, teléfono, correo y una estrella según `isFavorite`.
+- Lista generada con `.map()` en `ContactList`, con `key={contact.id}` en el contenedor de cada contacto.
+- Borde y fondo condicionales para distinguir contactos favoritos.
+- Estado de contactos administrado con `useState` en `App.jsx`.
+- Botón **Agregar Contacto** que incorpora un contacto de ejemplo y actualiza la lista.
+- Nombre del nuevo contacto calculado con `contacts.length + 1`, como “Contacto 4”.
+- Botón **Eliminar** junto a cada tarjeta, con confirmación mediante `window.confirm()`.
+- Eliminación mediante `.filter()`, conservando los contactos cuyo ID es diferente al seleccionado.
+- Contador total que se actualiza al agregar o eliminar contactos.
 
-Los datos se definen en el array `contacts` de `src/App.jsx`. Actualmente hay cuatro contactos, dos de ellos favoritos. Al modificar el array y guardar, la lista y los contadores reflejan esos datos.
+La aplicación inicia con tres contactos: Ana García, Carlos López y María Torres. Ana y María están marcadas como favoritas en los datos iniciales.
+
+## Flujo de datos y funciones
+
+`App.jsx` mantiene el estado y define `handleAddContact` y `handleDeleteContact`.
+
+La lista recibe los datos y la función para eliminar:
+
+```jsx
+<ContactList contacts={contacts} onDeleteContact={handleDeleteContact} />
+```
+
+`ContactList` crea las tarjetas y, al pulsar Eliminar, llama a `onDeleteContact(contact.id)`. `App` solicita confirmación y actualiza el estado con `setContacts`. React muestra entonces la nueva lista y el total actualizado.
 
 ## Tecnologías
 
@@ -32,9 +48,14 @@ pnpm install
 pnpm dev
 ```
 
-En Windows PowerShell puedes usar `pnpm.cmd install` y `pnpm.cmd dev`.
+En Windows PowerShell puedes usar:
 
-Abre la dirección que indique Vite junto a `Local`, normalmente `http://localhost:5173/`. Mantén la terminal abierta mientras utilizas la aplicación. Para detenerla, pulsa `Ctrl + C`.
+```powershell
+pnpm.cmd install
+pnpm.cmd dev
+```
+
+Abre la dirección indicada por Vite junto a `Local`, normalmente [http://localhost:5173/](http://localhost:5173/). Mantén la terminal abierta mientras utilizas la aplicación. Para detener el servidor, pulsa `Ctrl + C`.
 
 ## Estructura principal
 
@@ -45,19 +66,33 @@ src/
 │   ├── ContactCard.jsx
 │   └── ContactList.jsx
 ├── App.jsx
+├── App.css
 ├── index.css
 └── main.jsx
 ```
 
-`App.jsx` contiene los datos y calcula los contadores. `ContactList` recorre los contactos y pasa sus datos a `ContactCard`. `Header` muestra el encabezado.
+- `App.jsx`: estado, funciones para agregar y eliminar, y contador total.
+- `ContactList.jsx`: recorrido de contactos, envío de props y botones de eliminación.
+- `ContactCard.jsx`: presentación de los datos y estilos según favorito.
+- `Header.jsx`: encabezado de la aplicación.
+- `main.jsx`: inicio de React.
 
-## Verificación de la entrega
+## Comprobación manual
 
-1. Comprobar que aparecen el encabezado y las cuatro tarjetas con nombre, teléfono y correo.
-2. Comprobar que el contador muestra cuatro contactos y dos favoritos.
-3. Comparar un favorito con un contacto normal: deben cambiar la estrella, el borde y el fondo.
-4. Agregar un contacto al array con un `id` único y guardar: debe aparecer una tarjeta adicional y actualizarse el total.
-5. Cambiar `isFavorite` en los datos y guardar: deben actualizarse los estilos y la cantidad de favoritos.
+1. Abrir la página y comprobar que aparecen tres contactos y el total de 3.
+2. Comparar las tarjetas favoritas con la de Carlos: cambian el borde, el fondo y la estrella.
+3. Pulsar **Agregar Contacto**: debe aparecer “Contacto 4” y el total debe pasar a 4.
+4. Pulsar **Eliminar** y cancelar: la lista y el total deben permanecer iguales.
+5. Pulsar **Eliminar** y aceptar: debe desaparecer únicamente el contacto elegido y disminuir el total.
+6. Eliminar todos los contactos: el total debe quedar en 0; el botón Agregar debe seguir disponible.
+
+## Alcance actual
+
+Los cambios se mantienen en memoria durante el uso de la página. Al recargarla, se recuperan los tres contactos iniciales.
+
+El botón Agregar utiliza datos de ejemplo, sin formulario. El número del nombre depende del tamaño actual de la lista y puede repetirse después de eliminar contactos. Los identificadores temporales se generan con `Date.now()`.
+
+Los favoritos se distinguen visualmente según sus datos; esta versión no incluye botón para cambiarlos, filtro de favoritos ni contador de favoritos.
 
 ## Repositorio
 
