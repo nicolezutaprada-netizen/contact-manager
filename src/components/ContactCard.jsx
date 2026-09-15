@@ -28,6 +28,7 @@ export default function ContactCard({ name, phone, email, isFavorite }) {
       </h3>
       <p style={{ margin: '5px 0', color: '#666' }}>📞 {phone}</p>
       <p style={{ margin: '5px 0', color: '#666' }}>✉️ {email}</p>
+      
     </div>
   );
 }

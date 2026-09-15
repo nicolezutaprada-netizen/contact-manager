@@ -1,32 +1,63 @@
-
-
+import { useState } from 'react';
 import Header from './components/Header';
 import ContactList from './components/ContactList';
-// Las propiedades de cada contacto coinciden con las que se leen en ContactList.
-const contacts = [
-  { id: 1, name: "Ana García", phone: "+1 (555) 123-4567", email: "ana@email.com", isFavorite: true },
-  { id: 2, name: "Carlos López", phone: "+1 (555) 987-6543", email: "carlos@email.com", isFavorite: false },
-  { id: 3, name: "María Torres", phone: "+1 (555) 456-7890", email: "maria@email.com", isFavorite: true },
-  { id: 4, name: "Luis Martínez", phone: "+1 (555) 234-5678", email: "luis@email.com", isFavorite: false }
-];
 
+
+//contacts → la lista de datos.
+//setContacts → la función que cambia esa lista.
 export default function App() {
-// Recorre contacts y crea un nuevo array solo con los favoritos Y Guarda la cantidad final en la variable favoriteCount.
-  const favoriteCount = contacts.filter(function(c) {
-// c es el contacto que se está revisando en esta vuelta. Si c.isFavorite es true, se incluye; si es false, se excluye.
-    return c.isFavorite;
-// .length cuenta cuántos contactos quedaron en el nuevo array.
-  }).length;
+  const [contacts, setContacts] = useState([
+    { id: 1, name: "Ana García", phone: "555-1234", email: "ana@email.com", isFavorite: true },
+    { id: 2, name: "Carlos López", phone: "555-5678", email: "carlos@email.com", isFavorite: false },
+    { id: 3, name: "María Torres", phone: "555-9012", email: "maria@email.com", isFavorite: true }
+  ]);
+
+  
+// En App.jsx, agregar función y botón
+function handleAddContact() {
+  const newContact = {
+    id: Date.now(), // ID único temporal
+    name: "Contacto " + (contacts.length + 1),
+    phone: "000-0000",
+    email: "nuevo@email.com",
+    isFavorite: false
+  };
+
+  setContacts([...contacts, newContact]);
+}
+
+
+// En App.jsx
+//HABER ENTONCES EN EL MOMENTO EN EL QUE EL USUARIO SELECCIONA ELIMINAR ESE CONTACT ID ENTRA EN FILTER  Y FILTER SOLO
+//  GUARDA A LOS QUE SEAN DIFERENTES DEL CONTACT ID Q EL USUARIO PRESIONO PA ELIMINAR, 
+// QUEDANDO SOLO LOS Q NO SE QUIEREN ELIMINAR
+function handleDeleteContact(contactId) {
+  if (window.confirm("¿Estás seguro de que deseas eliminar este contacto?")) {
+    const updatedContacts = contacts.filter(function(contact) {
+      return contact.id !== contactId;
+    });
+
+    setContacts(updatedContacts);
+  }
+}
+
+
 
   return (
-    <div style={{ padding: '20px', width: '100%', maxWidth: '600px', boxSizing: 'border-box', margin: '0 auto' }}>
+    <div style={{ padding: '20px', maxWidth: '600px' }}>
       <Header />
-
-      <p style={{ color: '#666', margin: '0 0 16px', lineHeight: 1.5 }}>
-        Total: {contacts.length} contactos | Favoritos: {favoriteCount}
-      </p>
-
-      <ContactList contacts={contacts} />
+<button
+  onClick={handleAddContact}
+  style={{ marginBottom: '20px', padding: '10px 20px' }}
+>
+  + Agregar Contacto
+</button>
+      <p>Total: {contacts.length} contactos</p>
+      <ContactList   
+      contacts={contacts}
+      onDeleteContact={handleDeleteContact} />
     </div>
   );
 }
+
+
