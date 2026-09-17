@@ -12,7 +12,10 @@ export default function ContactList({ contacts, onDeleteContact }) {
             gap: '10px',
             marginBottom: '10px'
           }}>
+            //key es un identificador unico pero id es el identificador del contacto
             <ContactCard
+             key={contact.id} 
+              id={contact.id}
               name={contact.name}
               phone={contact.phone}
               isFavorite={contact.isFavorite}
