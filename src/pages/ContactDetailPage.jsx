@@ -1,17 +1,11 @@
 //importa useParams y Link de react-router-dom para obtener parámetros de la URL y crear enlaces de navegación
 import { useParams, Link } from 'react-router-dom';
 
-export default function ContactDetailPage() {
+// Recibe la lista desde App para buscar cualquier contacto, incluso los nuevos.
+export default function ContactDetailPage({ contacts }) {
 //Estamos obteniendo el parámetro "id" de la URL, que se usará para buscar el contacto correspondiente en la lista de contactos.
 // id porque en la ruta definida en App.jsx se usa "/contact/:id", donde ":id" 
   const { id } = useParams();
-
-  // Por ahora, datos hardcodeados (en M2 vendrán de API)
-  const contacts = [
-    { id: 1, name: "Ana García", phone: "555-1234", email: "ana@email.com" },
-    { id: 2, name: "Carlos López", phone: "555-5678", email: "carlos@email.com" },
-    { id: 3, name: "María Torres", phone: "555-9012", email: "maria@email.com" }
-  ];
 
 //number(id) convierte el id de la URL (que es un string) a número para compararlo con los ids numéricos de los contactos.
 //find devuelve el primer elemento q cumpla
@@ -19,19 +13,24 @@ export default function ContactDetailPage() {
 //!contact verifica si no se encontró un contacto con ese id. Si no se encuentra, muestra un mensaje de error y un enlace para volver al inicio.
   if (!contact) {
     return (
-      <div>
+      <section className="page content-card content-card--center">
+        <div className="page-icon">🔎</div>
         <h2>Contacto no encontrado</h2>
-        <Link to="/">← Volver al inicio</Link>
-      </div>
+        <Link to="/" className="back-link">← Volver al inicio</Link>
+      </section>
     );
   }
 //si se encuentra:
   return (
-    <div>
-      <Link to="/">← Volver</Link>
+    <section className="page content-card content-card--center">
+      <div className="page-icon">👤</div>
       <h1>{contact.name}</h1>
-      <p>📞 {contact.phone}</p>
-      <p>📧 {contact.email}</p>
-    </div>
+      <p>Información del contacto</p>
+      <div className="detail-list">
+        <div className="detail-row"><span>📞</span><span>{contact.phone}</span></div>
+        <div className="detail-row"><span>✉️</span><span>{contact.email}</span></div>
+      </div>
+      <Link to="/" className="back-link">← Volver a contactos</Link>
+    </section>
   );
 }

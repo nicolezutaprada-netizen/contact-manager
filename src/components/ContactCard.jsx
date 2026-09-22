@@ -18,35 +18,28 @@ export default function ContactCard({
     navigate(`/contact/${id}`);
   }
 
-  const cardStyle = {
-    border: isFavorite ? '2px solid #ffd700' : '1px solid #ddd',
-    borderRadius: '8px',
-    overflowWrap: 'anywhere',
-    padding: '15px',
-    marginBottom: '10px',
-    backgroundColor: isFavorite ? '#fffef0' : '#fff',
-    cursor: 'pointer'
-  };
-
   //style={cardStyle} aplica los estilos definidos en la constante cardStyle a la tarjeta de contacto.
   //onClick={handleClick} hace que cuando el usuario haga clic en la tarjeta, se ejecute la función handleClick, que redirige a la página de detalles del contacto.
 //"style" solo se  puede usar para aplicar estilos en línea a un elemento HTML. No se puede usar para definir clases CSS ni para aplicar estilos globales.
   return (
 
-    <div style={cardStyle} onClick={handleClick}>
-      <h3 style={{ margin: '0 0 10px 0', lineHeight: 1.4 }}>
+    <div
+      className={`contact-card${isFavorite ? ' contact-card--favorite' : ''}`}
+      onClick={handleClick}
+    >
+      <h3 className="contact-card__title">
         {name}
 
-        <span style={{ marginLeft: '10px' }}>
+        <span className="contact-card__favorite">
           {isFavorite ? '⭐' : '☆'}
         </span>
       </h3>
 
-      <p style={{ margin: '5px 0', color: '#666' }}>
+      <p className="contact-card__detail">
         📞 {phone}
       </p>
 
-      <p style={{ margin: '5px 0', color: '#666' }}>
+      <p className="contact-card__detail">
         ✉️ {email}
       </p>
     </div>

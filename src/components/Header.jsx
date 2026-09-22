@@ -1,14 +1,8 @@
 export default function Header() {
   return (
-    <header style={{
-      backgroundColor: '#4a90e2',
-      color: 'white',
-      padding: '20px',
-      borderRadius: '8px',
-      marginBottom: '20px'
-    }}>
-      <h1 style={{ margin: 0, fontSize: 'clamp(24px, 5vw, 32px)', lineHeight: 1.2, color: 'inherit', letterSpacing: 'normal' }}>📱 Contact Manager</h1>
-      <p style={{ margin: '10px 0 0 0', opacity: 0.9 }}>
+    <header className="app-header">
+      <h1>📱 Contact Manager</h1>
+      <p>
         Gestiona tus contactos de forma sencilla
       </p>
     </header>
